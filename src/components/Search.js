@@ -26,6 +26,26 @@ const Search = () => {
     }
   }, [term]);
 
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+            target="_blank"
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          {result.snippet}
+        </div>
+      </div>
+    );
+  });
+
   return (
     <div className="ui form">
       <div className="field">
@@ -36,7 +56,8 @@ const Search = () => {
           className="input"
         ></input>
       </div>
-      <Accordion items={results}></Accordion>
+      <div className="ui celled list">{renderedResults}</div>
+      {/* <Accordion items={results}></Accordion> */}
     </div>
   );
 };
