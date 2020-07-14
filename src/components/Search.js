@@ -21,11 +21,15 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    const timeoutId = setTimeout(() => {
-      if (term) {
-        get();
-      }
-    }, 1000);
+    if (term && !get.length) {
+      get();
+    } else {
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          get();
+        }
+      }, 1000);
+    }
 
     return () => {
       clearTimeout(timeoutId);
