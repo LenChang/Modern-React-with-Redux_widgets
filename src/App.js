@@ -4,6 +4,7 @@ import Dropdown from "./components/Dropdown";
 import Translate from "./components/Translate";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
+import Route from "./components/Route";
 
 const items = [
   { title: "What is React?", content: "React is a front end js framework" },
@@ -19,37 +20,28 @@ const options = [
   { label: "The Shade of Blue", value: "blue" },
 ];
 
-const showAccordion = () => {
-  if (window.location.pathname === "/") {
-    return <Accordion items={items}></Accordion>;
-  }
-};
-
-const showList = () => {
-  if (window.location.pathname === "/list") {
-    return <Search></Search>;
-  }
-};
-
-const showDropdown = () => {
-  if (window.location.pathname === "/dropdown") {
-    return <Dropdown></Dropdown>;
-  }
-};
-
-const showTranslate = () => {
-  if (window.location.pathname === "/translate") {
-    return <Translate></Translate>;
-  }
-};
-
 export default () => {
+  const [selected, setSelected] = useState(options[0]);
+
   return (
     <div>
-      {showAccordion()}
-      {showList()}
-      {showDropdown()}
-      {showTranslate()}
+      <Route path="/">
+        <Accordion items={items}></Accordion>
+      </Route>
+      <Route path="/list">
+        <Search></Search>
+      </Route>
+      <Route path="/dropdown">
+        <Dropdown
+          label="Select a color"
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        ></Dropdown>
+      </Route>
+      <Route path="/translate">
+        <Translate></Translate>
+      </Route>
     </div>
   );
 };
