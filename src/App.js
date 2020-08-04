@@ -5,6 +5,7 @@ import Translate from "./components/Translate";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Route from "./components/Route";
+import Header from "./components/Header";
 
 const items = [
   { title: "What is React?", content: "React is a front end js framework" },
@@ -25,6 +26,7 @@ export default () => {
 
   return (
     <div>
+      <Header />
       <Route path="/">
         <Accordion items={items}></Accordion>
       </Route>
